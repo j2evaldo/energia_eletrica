@@ -1,0 +1,15 @@
+resources:
+  pipelines:
+    grid_intelligence:
+      name: grid_intelligence
+      catalog: ${var.catalog}
+      schema: ${resources.schemas.bronze.name}
+      serverless: true
+      configuration:
+        catalogo: ${var.catalog}
+        schema_bronze: ${resources.schemas.bronze.name}
+        volume_landing: /Volumes/${var.catalog}/${resources.schemas.raw.name}/landing
+        duracao_minima_minutos: "3"
+      libraries:
+        - glob:
+            include: ../src/pipelines/grid_intelligence/transformations/**
